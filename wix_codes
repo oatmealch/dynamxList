@@ -1,0 +1,128 @@
+import wixData from 'wix-data';
+
+let inputValue = '';
+let typeValue = '';
+let isBossValue = '';
+let isChecked = false;
+let filterFinal = '';
+
+const textResult = '검색결과: ';
+const textFilter = ' / 현재필터: ';
+let numResult = 0;
+let textCurrentFilter = '';
+
+$w.onReady(function () {
+
+});
+
+function pokeFilter () {
+	textCurrentFilter = typeValue;
+	let filterType = wixData.filter().contains('type01', typeValue).or(wixData.filter().contains('type02', typeValue))
+	let filterIsBoss = wixData.filter().contains('isBoss', isBossValue)
+	let filterInput = wixData.filter().contains('name', inputValue).or(wixData.filter().contains('ability', inputValue)).or(wixData.filter().contains('move01', inputValue)).or(wixData.filter().contains('move02', inputValue)).or(wixData.filter().contains('move03', inputValue)).or(wixData.filter().contains('move04', inputValue))
+	filterFinal =filterType.and(filterInput).and(filterIsBoss)
+	$w('#dataset1').setFilter(filterFinal).then((results) => {
+    numResult = $w('#dataset1').getTotalCount()
+	$w('#resultMessage').text = textResult + String(numResult) + textFilter + textCurrentFilter
+ 	 } )
+	}
+
+export function checkbox1_change(event) {
+	isChecked = !isChecked
+	if (isChecked) {
+		isBossValue = '✔'
+	} else {
+		isBossValue = ''
+	}
+	pokeFilter()
+}
+
+export function typeAll_click(event) {
+	typeValue = ''
+	pokeFilter()
+}
+
+export function search_keyPress(event) {
+	inputValue = $w('#search').value
+	pokeFilter()
+}
+
+export function typeGrass_click(event) {
+	typeValue = '풀'
+	pokeFilter()
+}
+
+export function typeWater_click(event) {
+	typeValue = '물'
+	pokeFilter()
+}
+
+export function typeFire_click(event) {
+	typeValue = '불꽃'
+	pokeFilter()
+}
+
+export function typeElectric_click(event) {
+	typeValue = '전기'
+	pokeFilter()
+}
+
+export function typeGround_click(event) {
+	typeValue = '땅'
+	pokeFilter() 
+}
+
+export function typeNormal_click(event) {
+	typeValue = '노말'
+	pokeFilter()
+}
+
+export function typeGhost_click(event) {
+	typeValue = '고스트'
+	pokeFilter()
+}
+
+export function typeDragon_click(event) {
+	typeValue = '드래곤'
+	pokeFilter()
+}
+
+export function typePsychic_click(event) {
+	typeValue = '에스퍼'
+	pokeFilter()
+}
+
+export function typeFighiting_click(event) {
+	typeValue = '격투'
+	pokeFilter()
+}
+
+export function typePoison_click(event) {
+	typeValue = '독'
+	pokeFilter()
+}
+
+export function typeRock_click(event) {
+	typeValue = '바위'
+	pokeFilter()
+}
+
+export function typeIce_click(event) {
+	typeValue = '얼음'
+	pokeFilter()
+}
+
+export function typeDark_click(event) {
+	typeValue = '악'
+	pokeFilter()
+}
+
+export function typeSteel_click(event) {
+	typeValue = '강철'
+	pokeFilter()
+}
+
+export function typeFairy_click(event) {
+	typeValue = '페어리'
+	pokeFilter()
+}
